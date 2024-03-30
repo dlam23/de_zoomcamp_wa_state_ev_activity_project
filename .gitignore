@@ -1,0 +1,6 @@
+.DS_Store
+.preferences.yaml
+*.tfstate
+*.tfstate.*
+**.terraform
+**.terraform.lock.*
