@@ -10,29 +10,46 @@ blocks:
   language: python
   name: load_from_api
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_from_api
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration:
     file_source:
       path: data_exporters/load_to_gcs_partition.py
-  downstream_blocks: []
+  downstream_blocks:
+  - submit_spark_job
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
   name: load_to_gcs_partition
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
   - load_from_api
   uuid: load_to_gcs_partition
+- all_upstream_blocks_executed: false
+  color: pink
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: submit_spark_job
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - load_to_gcs_partition
+  uuid: submit_spark_job
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -44,16 +61,17 @@ executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: extract
+name: etl
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
 run_pipeline_in_one_process: false
 settings:
-  triggers: null
+  triggers:
+    save_in_code_automatically: true
 spark_config: {}
 tags: []
 type: python
-uuid: extract
-variables_dir: /root/.mage_data/zoomcamp_project_local
+uuid: etl
+variables_dir: /root/.mage_data/demo_project
 widgets: []

@@ -1,0 +1,23 @@
+triggers:
+- envs: []
+  last_enabled_at: null
+  name: dramatic crafter
+  pipeline_uuid: etl
+  schedule_interval: null
+  schedule_type: null
+  settings: null
+  sla: null
+  start_time: null
+  status: inactive
+  variables: null
+- envs: []
+  last_enabled_at: 2024-04-05 05:38:00.796888
+  name: get_latest
+  pipeline_uuid: etl
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-04-05 12:00:00
+  status: active
+  variables: {}

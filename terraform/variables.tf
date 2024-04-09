@@ -23,13 +23,13 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The default compute region"
-  default     = "us-west2"
+  default     = "us-west1"
 }
 
 variable "zone" {
   type        = string
   description = "The default compute zone"
-  default     = "us-west2-a"
+  default     = "us-west1-a"
 }
 
 variable "repository" {
@@ -94,10 +94,5 @@ variable "gcs_storage_class" {
 
 variable "cluster_name" {
   description = "Dataproc Cluster Name"
-  default     = "de_zoomcamp_project_cluster"
-}
-
-variable "num_workers" {
-  description = "Dataproc Cluster Name"
-  default     = 2
+  default     = "de-zoomcamp-project-cluster"
 }

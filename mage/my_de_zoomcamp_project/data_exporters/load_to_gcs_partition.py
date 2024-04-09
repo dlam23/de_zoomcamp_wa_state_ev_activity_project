@@ -5,10 +5,8 @@ import os
 if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/src/secrets/personal-gcp.json"
-
-bucket_name = 'mage-zoomcamp-dylan'
-project_id = 'galvanic-crow-412709'
+bucket_name = os.getenv("GCP_BUCKET_NAME")
+project_id = os.getenv("GCP_PROJECT_ID")
 
 table_name = "wa_state_ev_activity_data"
 
@@ -29,7 +27,7 @@ def export_data(data, *args, **kwargs):
         Optionally return any object and it'll be logged and
         displayed when inspecting the block run.
     """
-    data['transaction_date'] = data['transaction_date'].dt.strftime("%Y-%m-%d")
+    data['transaction_date'] = data['transaction_date'].dt.date
     
     unique_dates = data['transaction_date'].unique()
 

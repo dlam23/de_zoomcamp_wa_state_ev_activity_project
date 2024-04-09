@@ -83,10 +83,9 @@ resource "google_bigquery_dataset" "demo_dataset" {
 }
 
 resource "google_dataproc_cluster" "spark_cluster" {
-  region         = var.region
-  cluster_name   = var.cluster_name
-  num_workers    = var.num_workers
-} 
+  name   = var.cluster_name
+  region = var.region
+}
 
 # Create the Cloud Run service
 resource "google_cloud_run_service" "run_service" {
@@ -96,7 +95,7 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = var.docker_image
+        image = "us-west1-docker.pkg.dev/galvanic-crow-412709/my-docker-images/mageprod:latest"
         ports {
           container_port = 6789
         }
@@ -127,16 +126,16 @@ resource "google_cloud_run_service" "run_service" {
           value = var.app_name
         }
         env {
+          name  = "GCP_BUCKET_NAME"
+          value = var.gcs_bucket_name
+        }
+        env {
           name  = "MAGE_DATABASE_CONNECTION_URL"
           value = "postgresql://${var.database_user}:${var.database_password}@/${var.app_name}-db?host=/cloudsql/${google_sql_database_instance.instance.connection_name}"
         }
         env {
           name  = "ULIMIT_NO_FILE"
           value = 16384
-        }
-        env {
-          name  = "SPARK_MASTER_HOST"
-          value = google_dataproc_cluster.spark_cluster.endpoint
         }
         # volume_mounts {
         #   mount_path = "/secrets/bigquery"
