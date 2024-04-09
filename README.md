@@ -69,6 +69,7 @@ terraform apply
 ```sh
 gsutil -m cp spark_bigquery.py gs://staging-bucket-<project_id>/code/
 ```
+The Spark script drops extraneous columns, aggregates the data, and saves the result as a BigQuery table partitioned on transaction_date as this will be the most common query pattern.
 
 At this point, the pipeline is active and set to trigger daily at 12:00 UTC.
 Replace `<project_id>` and `<region>` with your actual Google Cloud project ID and region, respectively.
