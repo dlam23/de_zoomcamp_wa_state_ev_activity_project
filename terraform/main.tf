@@ -95,7 +95,7 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = "us-west1-docker.pkg.dev/galvanic-crow-412709/my-docker-images/mageprod:latest"
+        image = var.docker_image
         ports {
           container_port = 6789
         }

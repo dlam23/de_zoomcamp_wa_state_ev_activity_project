@@ -54,7 +54,7 @@ variable "database_password" {
 variable "docker_image" {
   type        = string
   description = "The docker image to deploy to Cloud Run."
-  default     = "mageai/mageai:latest"
+  default     = "us-west1-docker.pkg.dev/galvanic-crow-412709/my-docker-images/mageprod:latest"
 }
 
 variable "domain" {
